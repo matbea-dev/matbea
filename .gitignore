@@ -14,3 +14,4 @@ packages/**/style.css
 .nova/
 .gitpod.yml
 
+lerna-debug.log
