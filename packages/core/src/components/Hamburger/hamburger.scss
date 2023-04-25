@@ -1,0 +1,70 @@
+.hamburger {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--hamburger-width);
+  height: var(--hamburger-height);
+
+  cursor: pointer;
+
+  &__body {
+    position: relative;
+
+    width: var(--hamburger-body-width);
+    height: var(--hamburger-body-height);
+  }
+  &__band,
+  &__body::before,
+  &__body::after {
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: var(--hamburger-band-height);
+
+    background-color: var(--hamburger-background-color);
+    border-radius: var(--hamburger-band-border-r);
+
+    transition: all var(--transition) ease 0s;
+  }
+  &__body::before,
+  &__body::after {
+    content: "";
+  }
+  &__body::before {
+    top: 0;
+  }
+  &__body::after {
+    bottom: 0;
+  }
+  &__band {
+    top: 50%;
+
+    transform: scale(1) translateY(-50%);
+  }
+  &--active .hamburger__band {
+    transform: scale(0) translateY(-50%);
+    opacity: 0;
+  }
+  &--active .hamburger__body::before {
+    top: 50%;
+
+    transform: rotate(-45deg) translate(0, -50%);
+  }
+  &--active .hamburger__body::after {
+    bottom: 48%;
+
+    transform: rotate(45deg) translate(0, 50%);
+  }
+  &__body:hover::before,
+  &__body:hover::after {
+    background-color: var(--hamburger-background-color-hover);
+  }
+  &__body:hover {
+    .hamburger__band {
+      background-color: var(--hamburger-background-color-hover);
+    }
+  }
+}

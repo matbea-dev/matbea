@@ -1,0 +1,44 @@
+.btn--flat {
+  padding: 0;
+  height: auto;
+
+  color: var(--button-flat-color);
+
+  background-color: var(--button-flat-bg);
+  border: none;
+
+  .icon {
+    fill: var(--button-flat-icon-color);
+  }
+
+  &:hover {
+    color: var(--button-flat-color-hover);
+
+    background-color: var(--button-flat-bg-hover);
+    border: none;
+
+    .icon {
+      fill: var(--button-flat-icon-color-hover);
+    }
+  }
+  &:active {
+    color: var(--button-flat-color-active);
+
+    background-color: var(--button-flat-bg-active);
+    border: none;
+
+    .icon {
+      fill: var(--button-flat-icon-color-active);
+    }
+  }
+  &:disabled {
+    color: var(--button-flat-color-disabled);
+
+    background-color: var(--button-flat-bg-disabled);
+    border: none;
+
+    .icon {
+      fill: var(--button-flat-icon-color-disabled);
+    }
+  }
+}

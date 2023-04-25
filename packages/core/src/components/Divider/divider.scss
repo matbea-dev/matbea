@@ -1,0 +1,9 @@
+.divider {
+  width: 100%;
+  height: var(--divider-height);
+  flex: 1 1 auto;
+
+  &--type-solid {
+    background-color: var(--divider-solid-bg-color);
+  }
+}

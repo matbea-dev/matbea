@@ -1,0 +1,1 @@
+export { LinkExtern } from "./LinkExtern";

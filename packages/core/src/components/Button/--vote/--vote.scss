@@ -1,0 +1,33 @@
+.btn--vote {
+  color: var(--button-vote-color);
+
+  background-color: var(--button-vote-bg);
+  border-color: var(--button-vote-border-color);
+
+  & .icon {
+    fill: var(--button-vote-icon-fill);
+  }
+
+  &:hover {
+    color: var(--button-vote-color-hover);
+
+    background-color: var(--button-vote-bg-hover);
+    border-color: var(--button-vote-border-color-hover);
+  }
+  &:active {
+    color: var(--button-vote-color-active);
+
+    background-color: var(--button-vote-bg-active);
+    border-color: var(--button-vote-border-color-active);
+  }
+  &:disabled {
+    color: var(--button-vote-color-disabled);
+
+    background-color: var(--button-vote-bg-disabled);
+    border-color: var(--button-vote-border-color-disabled);
+
+    & .icon {
+      fill: var(--button-vote-icon-fill);
+    }
+  }
+}

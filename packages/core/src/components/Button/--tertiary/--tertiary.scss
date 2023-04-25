@@ -1,0 +1,25 @@
+.btn--tertiary {
+  color: var(--button-tertiary-color);
+
+  background: var(--button-tertiary-bg);
+  border-color: var(--button-tertiary-border);
+
+  &:hover {
+    color: var(--button-tertiary-color-hover);
+
+    background: var(--button-tertiary-bg-hover);
+    border-color: var(--button-tertiary-border-hover);
+  }
+  &:active {
+    color: var(--button-tertiary-color-active);
+
+    background: var(--button-tertiary-bg-active);
+    border-color: var(--button-tertiary-border-active);
+  }
+  &:disabled {
+    color: var(--button-tertiary-color-disabled);
+
+    background: var(--button-tertiary-bg-disabled);
+    border-color: var(--button-tertiary-border-color-disabled);
+  }
+}

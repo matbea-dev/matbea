@@ -1,0 +1,8 @@
+@import "../../styles/mixins.scss";
+.box {
+  box-sizing: border-box;
+}
+@import "./box-styles/box--padding.scss";
+@import "./box-styles/box--border-radius.scss";
+@import "./box-styles/box--shadow.scss";
+@import "./box-styles/box--bg-color.scss";

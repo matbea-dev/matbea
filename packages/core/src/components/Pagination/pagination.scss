@@ -1,0 +1,108 @@
+@import "../../styles/mixins.scss";
+.pagination {
+  display: flex;
+  align-items: center;
+  column-gap: var(--pagination-column-gap);
+
+  &__button {
+    position: relative;
+
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--pagination-button-size);
+    width: var(--pagination-button-size);
+    flex: 0 0 var(--pagination-button-size);
+    padding: 0;
+    margin: 0;
+
+    font-family: var(--font-main);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: normal;
+    color: var(--pagination-button-color);
+    vertical-align: middle;
+    white-space: nowrap;
+    word-break: keep-all;
+
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: var(--pagination-button-border-width) solid var(--pagination-button-border-color);
+    border-radius: var(--pagination-button-border-r);
+    outline: none;
+
+    transition: all var(--transition) ease;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+
+    .icon {
+      fill: currentColor;
+    }
+    &:hover {
+      color: var(--pagination-button-color-hover);
+
+      background-color: var(--pagination-button-bg-color-hover);
+      border-color: var(--pagination-button-border-color-hover);
+    }
+    &:active,
+    &:focus {
+      color: var(--pagination-button-color-active);
+
+      background-color: var(--pagination-button-bg-color-active);
+      border-color: var(--pagination-button--color-active);
+    }
+    &:disabled {
+      color: var(--pagination-button-color-disabled);
+
+      background-color: var(--pagination-button-bg-color-disabled);
+      border-color: var(--pagination-button-border-color-disabled);
+    }
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--pagination-item-size);
+    height: var(--pagination-item-size);
+    flex: 0 0 var(--pagination-button-size);
+
+    font-family: var(--pagination-item-font-family);
+    font-size: var(--pagination-item-font-size);
+    line-height: var(--pagination-item-font-height);
+    font-weight: var(--pagination-item-font-weight);
+    color: var(--pagination-item-color);
+
+    user-select: none;
+
+    transition: all var(--transition) ease;
+
+    &--test {
+      cursor: pointer;
+
+      border-radius: var(--pagination-item-border-r);
+      border: var(--pagination-item-border-width) solid var(--pagination-item-border-color);
+      &:hover {
+        color: var(--pagination-item-color-hover);
+
+        background-color: var(--pagination-item-bg-color-hover);
+        border-color: var(--pagination-item-border-color-hover);
+      }
+      &:active,
+      &:focus {
+        color: var(--pagination-item-color-active);
+
+        background-color: var(--pagination-item-bg-color-active);
+        border-color: var(--pagination-item-border-color-active);
+      }
+    }
+    &--current {
+      color: var(--pagination-item-color-current);
+
+      background-color: var(--pagination-item-bg-color-current);
+      border-color: var(--pagination-item-border-color-current);
+    }
+  }
+}

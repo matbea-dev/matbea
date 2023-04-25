@@ -1,0 +1,20 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "include": ["./src", "../../types/index.d.ts"],
+    "exclude": [
+      "./lib",
+      "./dist",
+      "**/*.story.tsx"
+    ],
+    "compilerOptions": {
+      "rootDir": "src",
+      "baseUrl": ".",
+      "outDir": "lib",
+      "declaration": true,
+      "declarationMap": true,
+      "declarationDir": "lib",
+      "composite": true,
+      "paths": {}
+    }
+  }
+  

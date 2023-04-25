@@ -1,0 +1,6 @@
+47 error Error: Command failed with exit code 128: git tag v0.0.0 -m v0.0.0
+47 error fatal: tag 'v0.0.0' already exists
+47 error     at makeError (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/lib/error.js:60:11)
+47 error     at handlePromise (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/index.js:118:26)
+47 error     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+47 error     at async Promise.all (index 0)

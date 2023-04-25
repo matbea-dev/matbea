@@ -1,0 +1,25 @@
+.btn--sixth {
+  color: var(--button-sixth-color);
+
+  background-color: var(--button-sixth-bg);
+  border-color: var(--button-sixth-border-color);
+
+  &:hover {
+    color: var(--button-sixth-color-hover);
+
+    background-color: var(--button-sixth-bg-hover);
+    border-color: var(--button-sixth-border-color-hover);
+  }
+  &:active {
+    color: var(--button-sixth-color-active);
+
+    background-color: var(--button-sixth-bg-active);
+    border-color: var(--button-sixth-border-color-active);
+  }
+  &:disabled {
+    color: var(--button-sixth-color-disabled);
+
+    background-color: var(--button-sixth-bg-disabled);
+    border-color: var(--button-sixth-border-color-disabled);
+  }
+}

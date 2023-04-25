@@ -1,0 +1,35 @@
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+    .box-#{$infix}-border-radius-1 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 1px);
+    }
+    .box-#{$infix}-border-radius-2 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 2px);
+    }
+    .box-#{$infix}-border-radius-3 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 3px);
+    }
+    .box-#{$infix}-border-radius-4 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 4px);
+    }
+    .box-#{$infix}-border-radius-5 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 5px);
+    }
+    .box-#{$infix}-border-radius-6 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 6px);
+    }
+    .box-#{$infix}-border-radius-7 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 7px);
+    }
+    .box-#{$infix}-border-radius-8 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 8px);
+    }
+    .box-#{$infix}-border-radius-9 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 9px);
+    }
+    .box-#{$infix}-border-radius-10 {
+      border-radius: calc(var(--box-multiplier-border-radius) * 10px);
+    }
+  }
+}

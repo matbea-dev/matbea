@@ -1,0 +1,32 @@
+@import "../../../styles/mixins.scss";
+.space--column-gap-level1 {
+  @include space(column-gap, all, column-gap-level1);
+}
+.space--column-gap-level2 {
+  @include space(column-gap, all, column-gap-level2);
+}
+.space--column-gap-level3 {
+  @include space(column-gap, all, column-gap-level3);
+}
+.space--column-gap-level4 {
+  @include space(column-gap, all, column-gap-level4);
+}
+.space--column-gap-level5 {
+  @include space(column-gap, all, column-gap-level5);
+}
+/* Const */
+.space--column-gap-const-level1 {
+  @include space(column-gap, all, column-gap-constancy-level1);
+}
+.space--column-gap-const-level2 {
+  @include space(column-gap, all, column-gap-constancy-level2);
+}
+.space--column-gap-const-level3 {
+  @include space(column-gap, all, column-gap-constancy-level3);
+}
+.space--column-gap-const-level4 {
+  @include space(column-gap, all, column-gap-constancy-level4);
+}
+.space--column-gap-const-level5 {
+  @include space(column-gap, all, column-gap-constancy-level5);
+}

@@ -1,0 +1,75 @@
+@import "../../styles/mixins.scss";
+.btn {
+  position: relative;
+
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  column-gap: var(--button-column-gap);
+  justify-content: center;
+  height: var(--button-height);
+  padding: var(--button-padding);
+  margin: 0;
+
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  line-height: var(--button-line-height);
+  font-weight: var(--button-font-weight);
+  color: var(--button-color);
+  text-decoration: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-break: keep-all;
+
+  cursor: pointer;
+  user-select: none;
+  background: var(--button-background);
+  border: var(--button-border-width) solid var(--button-border-color);
+  border-radius: var(--button-border-radius);
+  outline: none;
+
+  transition: all var(--transition) ease;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+
+  & .icon {
+    fill: currentColor;
+  }
+  .text {
+    color: currentColor;
+  }
+  &:hover {
+    background: var(--button-background-color-hover);
+    border: var(--button-border-width) solid var(--button-border-color-hover);
+  }
+  &:active {
+    background: var(--button-background-color-active);
+    border: var(--button-border-width) solid var(--button-border-color-active);
+  }
+  &:disabled {
+    color: var(--button-color-disabled);
+    cursor: not-allowed;
+    background: var(--button-background-color-disabled);
+    border: var(--button-border-width) solid var(--button-border-color-disabled);
+
+    & .icon {
+      fill: var(--button-icon-fill-disabled);
+    }
+  }
+}
+
+@import "--size/--size.scss";
+@import "--width/--width.scss";
+@import "--secondary/--secondary.scss";
+@import "--tertiary/--tertiary.scss";
+@import "--fourth/--fourth.scss";
+@import "--fifth/--fifth.scss";
+@import "--sixth/--sixth.scss";
+@import "--flat/--flat.scss";
+@import "--circle/--circle.scss";
+@import "--vote/--vote.scss";
+@import "--warning/--warning.scss";
+@import "--only-icon/--only-icon.scss";
+@import "--icon/--icon.scss";
+@import "--icon-secondary/--icon-secondary.scss";

@@ -1,0 +1,16 @@
+node_modules/
+
+.DS_Store
+
+**/DS_Store
+
+packages/**/dist
+packages/**/lib
+packages/**/tsconfig.build.tsbuildinfo
+packages/**/style.css
+
+.idea/
+.vscode/
+.nova/
+.gitpod.yml
+

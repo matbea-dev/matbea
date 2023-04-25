@@ -1,0 +1,41 @@
+{
+  "name": "@matbea/core",
+  "version": "0.0.0",
+  "description": "Matbea Core Components",
+  "keywords": [
+    "hashbon",
+    "crypto"
+  ],
+  "scripts": {
+    "build": "esno ../../scripts/build.ts --project core"
+  },
+  "repository": {
+    "url": "https://github.com/matbea-dev/matbea.git",
+    "type": "git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "belchushka <savvashu@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "lib/index.d.ts",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "react-number-format": "^5.1.4",
+    "react-select": "^5.7.2",
+    "style-inject": "^0.3.0"
+  },
+  "files": [
+    "dist/*",
+    "lib/*"
+  ]
+}

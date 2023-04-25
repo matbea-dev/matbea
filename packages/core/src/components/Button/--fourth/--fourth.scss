@@ -1,0 +1,25 @@
+.btn--fourth {
+  color: var(--button-fourth-color);
+
+  background-color: var(--button-fourth-bg);
+  border-color: var(--button-fourth-border-color);
+
+  &:hover {
+    color: var(--button-fourth-color-hover);
+
+    background-color: var(--button-fourth-bg-hover);
+    border-color: var(--button-fourth-border-color-hover);
+  }
+  &:active {
+    color: var(--button-fourth-color-active);
+
+    background-color: var(--button-fourth-bg-active);
+    border-color: var(--button-fourth-border-color-active);
+  }
+  &:disabled {
+    color: var(--button-fourth-color-disabled);
+
+    background-color: var(--button-fourth-bg-disabled);
+    border-color: var(--button-fourth-border-color-disabled);
+  }
+}

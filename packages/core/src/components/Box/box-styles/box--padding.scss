@@ -1,0 +1,92 @@
+/* Spacer Top */
+.box--padding-top-level1 {
+  @include space(padding, top, level1);
+}
+.box--padding-top-level2 {
+  @include space(padding, top, level2);
+}
+.box--padding-top-level3 {
+  @include space(padding, top, level3);
+}
+.box--padding-top-level4 {
+  @include space(padding, top, level4);
+}
+.box--padding-top-level5 {
+  @include space(padding, top, level5);
+}
+.box--padding-top-level6 {
+  @include space(padding, top, level6);
+}
+.box--padding-top-level7 {
+  @include space(padding, top, level7);
+}
+.box--padding-top-level8 {
+  @include space(padding, top, level8);
+}
+.box--padding-top-level9 {
+  @include space(padding, top, level9);
+}
+.box--padding-top-level10 {
+  @include space(padding, top, level10);
+}
+.box--padding-top-const-level1 {
+  @include space(padding, top, row-gap-constancy-level1);
+}
+.box--padding-top-const-level2 {
+  @include space(padding, top, row-gap-constancy-level2);
+}
+.box--padding-top-const-level3 {
+  @include space(padding, top, row-gap-constancy-level3);
+}
+.box--padding-top-const-level4 {
+  @include space(padding, top, row-gap-constancy-level4);
+}
+.box--padding-top-const-level5 {
+  @include space(padding, top, row-gap-constancy-level5);
+}
+/* Spacer Bottom */
+.box--padding-bottom-level1 {
+  @include space(padding, bottom, level1);
+}
+.box--padding-bottom-level2 {
+  @include space(padding, bottom, level2);
+}
+.box--padding-bottom-level3 {
+  @include space(padding, bottom, level3);
+}
+.box--padding-bottom-level4 {
+  @include space(padding, bottom, level4);
+}
+.box--padding-bottom-level5 {
+  @include space(padding, bottom, level5);
+}
+.box--padding-bottom-level6 {
+  @include space(padding, bottom, level6);
+}
+.box--padding-bottom-level7 {
+  @include space(padding, bottom, level7);
+}
+.box--padding-bottom-level8 {
+  @include space(padding, bottom, level8);
+}
+.box--padding-bottom-level9 {
+  @include space(padding, bottom, level9);
+}
+.box--padding-bottom-level10 {
+  @include space(padding, bottom, level10);
+}
+.box--padding-bottom-const-level1 {
+  @include space(padding, bottom, row-gap-constancy-level1);
+}
+.box--padding-bottom-const-level2 {
+  @include space(padding, bottom, row-gap-constancy-level2);
+}
+.box--padding-bottom-const-level3 {
+  @include space(padding, bottom, row-gap-constancy-level3);
+}
+.box--padding-bottom-const-level4 {
+  @include space(padding, bottom, row-gap-constancy-level4);
+}
+.box--padding-bottom-const-level5 {
+  @include space(padding, bottom, row-gap-constancy-level5);
+}

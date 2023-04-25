@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "packages/*/src",
+    "./scripts",
+    "./types/index.d.ts"
+  ],
+  "exclude": [
+    "public",
+    ".cache",
+    "configs/**/*",
+    "node_modules",
+    "packages/**/dist/**/*",
+    "packages/**/lib/**/*"
+  ]
+}

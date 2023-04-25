@@ -1,0 +1,56 @@
+.link-extern {
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: all var(--transition) ease 0s;
+
+  .text {
+    color: currentColor;
+  }
+
+  .icon {
+    fill: currentColor;
+  }
+}
+.link-extern--primary {
+  color: var(--link-color);
+
+  &:hover {
+    color: var(--link-color-hover);
+  }
+  &:active {
+    color: var(--link-color-active);
+  }
+  &:visited {
+    color: var(--link-color-visited);
+  }
+}
+.link-extern--secondary {
+  color: var(--link-secondary-color);
+
+  &:hover {
+    color: var(--link-secondary-color-hover);
+  }
+}
+.link-extern--tertiary {
+  color: var(--link-tertiary-color);
+
+  &:hover {
+    color: var(--link-tertiary-color-hover);
+  }
+}
+.link-extern--fourt {
+  color: var(--link-fourt-color);
+
+  &:hover {
+    color: var(--link-fourt-color-hover);
+  }
+}
+.link-extern--opacity {
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

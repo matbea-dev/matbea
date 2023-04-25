@@ -1,0 +1,37 @@
+{
+  "name": "@matbea/payments",
+  "version": "0.0.0",
+  "description": "Matbea Payment Components",
+  "author": "belchushka <savvashu@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "esno ../../scripts/build.ts --project payments"
+  },
+  "repository": {
+    "url": "https://github.com/matbea-dev/matbea.git",
+    "type": "git",
+    "directory": "packages/payments"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "lib/index.d.ts",
+  "peerDependencies": {
+    "@matbea/core": "*",
+    "classnames": "*",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "@matbea/api": "^0.0.11",
+    "react-hook-form": "^7.43.9"
+  },
+  "files": [
+    "dist/*",
+    "lib/*"
+  ]
+}
