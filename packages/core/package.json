@@ -3,8 +3,10 @@
   "version": "0.0.2",
   "description": "Matbea Core Components",
   "keywords": [
-    "hashbon",
-    "crypto"
+    "metbea",
+    "crypto",
+    "components",
+    "react"
   ],
   "scripts": {
     "build": "esno ../../scripts/build.ts --project core"

@@ -4,6 +4,12 @@
   "description": "Matbea Payment Components",
   "author": "belchushka <savvashu@gmail.com>",
   "homepage": "",
+  "keywords": [
+    "crypto",
+    "exchange",
+    "react",
+    "components"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "esno ../../scripts/build.ts --project payments"
