@@ -1,0 +1,34 @@
+36 error Error: Command was killed with SIGABRT (Aborted): npm install --package-lock-only --ignore-scripts
+36 error
+36 error <--- Last few GCs --->
+36 error
+36 error [2303:0x148040000]    94559 ms: Scavenge 2042.7 (2085.1) -> 2041.0 (2085.3) MB, 1.8 / 0.0 ms  (average mu = 0.260, current mu = 0.219) task;
+36 error [2303:0x148040000]    94565 ms: Scavenge 2042.8 (2085.3) -> 2041.1 (2085.3) MB, 1.7 / 0.0 ms  (average mu = 0.260, current mu = 0.219) task;
+36 error [2303:0x148040000]    94571 ms: Scavenge 2042.9 (2085.3) -> 2041.2 (2089.3) MB, 2.0 / 0.0 ms  (average mu = 0.260, current mu = 0.219) task;
+36 error
+36 error
+36 error <--- JS stacktrace --->
+36 error
+36 error FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+36 error  1: 0x100270fe0 node::Abort() [/usr/local/bin/node]
+36 error  2: 0x1002711d4 node::ModifyCodeGenerationFromStrings(v8::Local<v8::Context>, v8::Local<v8::Value>, bool) [/usr/local/bin/node]
+36 error  3: 0x1003c2fa8 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/usr/local/bin/node]
+36 error  4: 0x10058334c v8::internal::EmbedderStackStateScope::EmbedderStackStateScope(v8::internal::Heap*, v8::internal::EmbedderStackStateScope::Origin, cppgc::EmbedderStackState) [/usr/local/bin/node]
+36 error  5: 0x10058763c v8::internal::Heap::CollectGarbageShared(v8::internal::LocalHeap*, v8::internal::GarbageCollectionReason) [/usr/local/bin/node]
+36 error  6: 0x100583e68 v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::internal::GarbageCollectionReason, char const*, v8::GCCallbackFlags) [/usr/local/bin/node]
+36 error  7: 0x1005814e4 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/usr/local/bin/node]
+36 error  8: 0x1006062f0 v8::internal::ScavengeJob::Task::RunInternal() [/usr/local/bin/node]
+36 error  9: 0x1002ce840 node::PerIsolatePlatformData::RunForegroundTask(std::__1::unique_ptr<v8::Task, std::__1::default_delete<v8::Task>>) [/usr/local/bin/node]
+36 error 10: 0x1002cd4ac node::PerIsolatePlatformData::FlushForegroundTasksInternal() [/usr/local/bin/node]
+36 error 11: 0x100c098d4 uv__async_io [/usr/local/bin/node]
+36 error 12: 0x100c1c078 uv__io_poll [/usr/local/bin/node]
+36 error 13: 0x100c09da4 uv_run [/usr/local/bin/node]
+36 error 14: 0x1001c1704 node::SpinEventLoopInternal(node::Environment*) [/usr/local/bin/node]
+36 error 15: 0x1002adce4 node::NodeMainInstance::Run() [/usr/local/bin/node]
+36 error 16: 0x10023e5e8 node::LoadSnapshotDataAndRun(node::SnapshotData const**, node::InitializationResultImpl const*) [/usr/local/bin/node]
+36 error 17: 0x10023e824 node::Start(int, char**) [/usr/local/bin/node]
+36 error 18: 0x18ebe7f28 start [/usr/lib/dyld]
+36 error     at makeError (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/lib/error.js:60:11)
+36 error     at handlePromise (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/index.js:118:26)
+36 error     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+36 error     at async Promise.all (index 0)
