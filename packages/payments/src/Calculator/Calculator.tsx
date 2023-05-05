@@ -1,61 +1,118 @@
-import React from 'react'
-import {Box, Space, BlockAlignText, H4, Input, CurrencyRate, SelectSearch, Button, TextButton} from '@matbea/core';
-import './style.scss';
-import {ICalculator} from './types'
-import classNames from 'classnames';
-import { useCalculator } from './hooks';
-import { Controller } from 'react-hook-form';
+import React from "react";
+import { ICalculator } from "./types";
+import cn from "classnames";
+import { Controller } from "react-hook-form";
+import IconSwap from "./icon--swap.svg";
+import { Box, TextButton, H4, Input, Divider, Button, BlockAlignText, SelectSearch, CurrencyRate, Space } from "@matbea/core";
+import { useCalculator } from "./hooks";
+import './style.scss'
+
+const boxStyles: Record<string, any> = {
+  standalone: {
+    className: "swap",
+    borderRadius: 5,
+    bgColor: "tertiary",
+    shadow: "tertiary",
+    paddingBottom: "level2",
+    paddingTop: "level2",
+  },
+  injected: {},
+};
 
 export const Calculator: React.FC<ICalculator> = ({
   style,
   className
 }) => {
+
   const {
-    wizardData,
-    loading,
-    errors,
-    selectOptions,
+    fields,
     comissionLoading,
-    formController,
-    submit,
-    setLastTouchedInput
+    form,
+    inOptions,
+    outOptions,
+    setLastTouchedInput,
+    isFlipped,
+    lastTouchedInput,
+    flip
   } = useCalculator()
 
-  if (loading){
+  const handleCalculatorSubmit = () => {
+    const query = new URLSearchParams();
+    let cur_to;
+    let cur_from;
 
-    return <p>loading...</p>
-  }
+    if (fields.currencyFrom?.type === "P") {
+      cur_from =
+        fields.currencyFrom?.paymentSystem?.bestchangeTickers
+          .deposit[0];
+    } else {
+      cur_from = fields.currencyFrom?.currency.shortName;
+    }
+
+    if (fields.currencyTo?.type === "P") {
+      cur_to =
+        fields?.currencyTo.paymentSystem?.bestchangeTickers
+          .deposit[0];
+    } else {
+      cur_to = fields.currencyTo?.currency.shortName;
+    }
+
+    const amount_from = +fields.amountFrom;
+    if (amount_from && amount_from > 0) {
+      query.set("amountFrom", amount_from.toString());
+    }
+
+    const amount_to = +fields.amountTo;
+    if (amount_to && amount_to > 0) {
+      query.set("amountTo", amount_to.toString());
+    }
+
+    query.set("isFlipped", isFlipped.toString());
+    query.set("isReverse", (lastTouchedInput === "TO").toString());
+
+    if (cur_to) {
+      query.set("currencyTo", cur_to);
+    }
+    if (cur_from) {
+      query.set("currencyFrom", cur_from);
+    }
+
+    window.open('https://matbea.com/swap?' + query)
+  };
 
   return (
-      <Box
-        className={classNames('swap', className)}
-        borderRadius={5}
-        style={style}
-        bgColor="tertiary"
-        shadow="tertiary"
-        paddingBottom="level2"
-        paddingTop="level2"
-      >
-       <Space flex direction="column" rowGap="level2"> 
+    <Box {...boxStyles.standalone}>
+      <Space flex direction="column" rowGap="level2">
           <BlockAlignText align="center">
             <H4>Calculator</H4>
           </BlockAlignText>
-          <div className="swap__body">
-            <Space
-              flex
-              justify="center"
-              breakpoints={{ md: { justify: "flex-end" } }}
-              className="swap__top"
-            >
+        <div className="swap__body">
+          <Space
+            flex
+            justify="center"
+            breakpoints={{ md: { justify: "flex-end" } }}
+            className="swap__top"
+          >
+            {fields.amountFrom && fields.amountTo && !comissionLoading && (
               <CurrencyRate
                 valueCrypto="1"
-                cryptoName={"BTC"}
-                valueFiat="200"
-                fiatName={"RUB"}
+                cryptoName={fields.currencyFrom?.currency.shortName || ""}
+                valueFiat={(
+                  parseFloat(fields.amountTo) / parseFloat(fields.amountFrom)
+                ).toFixed(fields.currencyTo?.currency.prec || 8)}
+                fiatName={fields.currencyTo?.currency.shortName || ""}
               />
+            )}
           </Space>
+
           <Space flex direction="column" rowGap="level1">
-            <Space className="swap__group" flex wrap="wrap" rowGap="level1">
+            <Space
+              className={cn("swap__group")}
+              flex
+              direction="column"
+              rowGap="const-level3"
+              breakpoints={{ md: { direction: "row" } }}
+            >
               <Space
                 flex
                 className="swap__group-item"
@@ -63,46 +120,76 @@ export const Calculator: React.FC<ICalculator> = ({
                 rowGap="level1"
               >
                 <Controller
-                  rules={{
-                    required: true
+                  control={form.control}
+                  name="currencyFrom"
+                  render={({ field }) => {
+                    return (
+                      <SelectSearch
+                        label={'You pay'}
+                        options={inOptions}
+                        placeholder={'Select currency'}
+                        onChange={field.onChange}
+                        value={field.value}
+                      />
+                    );
                   }}
-                  name='currencyFrom'
-                  control={formController}
-                  render={({field})=>{
-                    return <SelectSearch
-                    error={!!errors?.currencyFrom}
-                    label={'You pay'}
-                    options={selectOptions.in}
-                    placeholder={'Select currency'}
-                    onChange={field.onChange}
-                    value={field.value}
-                    />
-                  }}  
                 />
 
-                <Controller 
-                  name='amountFrom'
-                  rules={{
-                    required: 'Field is required'
-                  }}
-                  control={formController}
-                  render={({field})=>{
-                      return <Input
-                      disabled={comissionLoading}
-                      error={errors.amountFrom?.message.toString() || ''}
-                      name="amountFrom"
-                      placeholder="Enter amount"
-                      type="number"
-                      autoComplete="off"
-                      inputMode="numeric"
-                      value={field.value}
-                      onChange={(val)=>{
-                        field.onChange(val)
-                        setLastTouchedInput('from')
-                      }}
-                    />
+                <Controller
+                  control={form.control}
+                  name="amountFrom"
+                  render={({ field }) => {
+                    return (
+                      <Input
+                        name="amountFrom"
+                        placeholder={'Enter amount'}
+                        type="number"
+                        autoComplete="off"
+                        error={form.formState.errors.amountFrom?.message}
+                        inputMode="numeric"
+                        disabled={comissionLoading}
+                        value={field.value}
+                        onChange={(val) => {
+                          field.onChange(val);
+                          setLastTouchedInput("FROM");
+                        }}
+                        icon={{
+                          right: fields.currencyFrom &&
+                            fields.currencyFrom.currency.linkToIcon && (
+                              <img
+                                src={fields.currencyFrom.currency.linkToIcon}
+                                sizes="24"
+                                height="24"
+                                width={24}
+                                alt={
+                                  fields.currencyFrom.currency.shortName ||
+                                  "icon"
+                                }
+                              />
+                            ),
+                        }}
+                      />
+                    );
                   }}
                 />
+              </Space>
+
+              <Space
+                className={cn("swap__button-swap", {
+                  ["swap__button-swap--active"]: isFlipped,
+                })}
+                flex
+                align="center"
+                columnGap="const-level2"
+                justify="space-between"
+              >
+                <Divider type="solid" />
+
+                <Button variant="icon-secondary" onClick={flip}>
+                  <IconSwap className="icon icon--size-base" />
+                </Button>
+
+                <Divider type="solid" />
               </Space>
 
               <Space
@@ -111,54 +198,69 @@ export const Calculator: React.FC<ICalculator> = ({
                 direction="column"
                 rowGap="level1"
               >
-                <Controller 
-                  name='currencyTo'
-                  rules={{
-                    required: true
-                  }}
-                  control={formController}
-                  render={({field})=>{
-                      return <SelectSearch
-                      error={!!errors?.currencyTo}
-                      label={'You receive'}
-                      options={selectOptions.out}
-                      placeholder={'Select currency'}
-                      onChange={field.onChange}
-                      value={field.value}
-                    />
+                <Controller
+                  name="currencyTo"
+                  control={form.control}
+                  render={({ field }) => {
+                    return (
+                      <SelectSearch
+                        label={'You recive'}
+                        options={outOptions}
+                        placeholder={'Select currency'}
+                        onChange={field.onChange}
+                        value={field.value}
+                      />
+                    );
                   }}
                 />
 
-                <Controller 
-                  name='amountTo'
-                  control={formController}
-                  render={({field})=>{
-                      return <Input
-                      name="amountTo"
-                      disabled={comissionLoading}
-                      placeholder="Enter amount"
-                      type="number"
-                      autoComplete="off"
-                      inputMode="numeric"
-                      value={field.value}
-                      onChange={(val)=>{
-                        field.onChange(val)
-                        setLastTouchedInput('to')
-                      }}
-                    />
+                <Controller
+                  control={form.control}
+                  name="amountTo"
+                  render={({ field }) => {
+                    return (
+                      <Input
+                        name="currencyCrypto"
+                        placeholder={'Enter amount'}
+                        type="number"
+                        error={form.formState.errors.amountTo?.message}
+                        disabled={comissionLoading}
+                        autoComplete="off"
+                        inputMode="numeric"
+                        value={field.value}
+                        onChange={(val) => {
+                          field.onChange(val);
+                          setLastTouchedInput("TO");
+                        }}
+                        icon={{
+                          right: fields.currencyTo &&
+                            fields.currencyTo.currency.linkToIcon && (
+                              <img
+                                src={fields.currencyTo.currency.linkToIcon}
+                                sizes="24"
+                                height="24"
+                                width={24}
+                                alt={
+                                  fields.currencyTo.currency.shortName || "icon"
+                                }
+                              />
+                            ),
+                        }}
+                      />
+                    );
                   }}
                 />
-
               </Space>
             </Space>
-            </Space>
-          </div>
-          <Space direction="column" flex rowGap="const-level4">
-            <Button disabled={comissionLoading} onClick={submit}>
-              <TextButton weight="bold">Convert</TextButton>
-            </Button>
+          </Space>
+        </div>
+        <Space direction="column" flex rowGap="const-level4">
+          <Button disabled={comissionLoading} onClick={handleCalculatorSubmit}>
+            <TextButton weight="bold">Convert</TextButton>
+          </Button>
         </Space>
-       </Space>
-      </Box>
-  )
-}
+      </Space>
+    </Box>
+  );
+};
+

@@ -33,6 +33,8 @@ export interface IPaymentSystem {
     psDetailsFields: IPSDetailField[];
     maxSumWithdraw: number;
     maxSumDeposit: number;
+    minSumWithdraw: number;
+    minSumDeposit: number;
     forMainOrder: number;
     bestchangeTickers: IBestchangeTickers;
 }

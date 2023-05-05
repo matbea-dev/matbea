@@ -8,7 +8,7 @@
   ],
   "author": "belchushka <savvashu@gmail.com>",
   "scripts": {
-    "build": "esno ../../scripts/build.ts --project api"
+    "build": "dotenv -e .env -- esno ../../scripts/build.ts --project api"
   },
   "repository": {
     "url": "https://github.com/matbea-dev/matbea.git",

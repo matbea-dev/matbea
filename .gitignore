@@ -3,9 +3,10 @@ node_modules/
 .DS_Store
 
 **/DS_Store
+**/.env
 
 packages/**/dist
-packages/**/lib
+packages/*/lib
 packages/**/node_modules
 packages/**/tsconfig.build.tsbuildinfo
 packages/**/style.css

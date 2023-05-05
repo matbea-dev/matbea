@@ -10,6 +10,8 @@ import nodeExternals from 'rollup-plugin-node-externals';
 import postcssUrl from 'postcss-url';
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
+import dotenv from "rollup-plugin-dotenv"
+
 
 export interface PkgConfigInput {
   basePath: string;
@@ -48,6 +50,9 @@ export const buildRollupConfig = (config: PkgConfigInput): RollupOptions=>{
     ],
     plugins: [
       commonjs(),
+      dotenv({
+        cwd: process.cwd()
+      }),
       postcss({
         inject: true,
         minimize: true,

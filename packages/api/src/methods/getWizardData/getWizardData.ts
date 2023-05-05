@@ -1,8 +1,8 @@
 import { IWizardData, IPaymentSystem, ICurrency, IExchange, IDetailsField, IOption } from "../../types";
-import axios from 'axios';
+import {api} from '../../axios'
 
 export const apiGetWizardData = async (): Promise<IWizardData> => {
-    const {data: {data}} = await axios.get("https://lk.stage.matbea.xyz/api/front/get-wizard-data")
+    const {data: {data}} = await api.get("/front/get-wizard-data")
     const optionsDetailsFieldByFieldId = data.optionsDetailsFieldByFieldId;
     const paymentsSystems: IPaymentSystem[] = Object.values(
         data.paymentsSystems
@@ -33,8 +33,6 @@ export const apiGetWizardData = async (): Promise<IWizardData> => {
         fiatToCrypto[e.toCurrencyId].push(e.fromCurrencyId);
         }
     });
-
-    const inCurrencies: ICurrency[] = [];
 
     return {
         paymentsSystems,
