@@ -39,5 +39,6 @@
   "files": [
     "dist/*",
     "lib/*"
-  ]
+  ],
+  "gitHead": "9055bb92f47ed450cc1716140e1c27ed7c2fbf58"
 }

@@ -47,6 +47,7 @@ export const Calculator: React.FC<ICalculator> = ({
         fields.currencyFrom?.paymentSystem?.bestchangeTickers
           .deposit[0];
     } else {
+
       cur_from = fields.currencyFrom?.currency.shortName;
     }
 
