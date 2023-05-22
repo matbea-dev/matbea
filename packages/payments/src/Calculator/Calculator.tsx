@@ -6,6 +6,7 @@ import IconSwap from "./icon--swap.svg";
 import { Box, TextButton, H4, Input, Divider, Button, BlockAlignText, SelectSearch, CurrencyRate, Space } from "@matbea/core";
 import { useCalculator } from "./hooks";
 import './style.scss'
+import classNames from "classnames";
 
 const boxStyles: Record<string, any> = {
   standalone: {
@@ -81,7 +82,7 @@ export const Calculator: React.FC<ICalculator> = ({
   };
 
   return (
-    <Box {...boxStyles.standalone}>
+    <Box {...boxStyles.standalone} style={style} className={classNames('swap',className)}>
       <Space flex direction="column" rowGap="level2">
           <BlockAlignText align="center">
             <H4>Calculator</H4>
