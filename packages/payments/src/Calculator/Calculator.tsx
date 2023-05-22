@@ -68,14 +68,13 @@ export const Calculator: React.FC<ICalculator> = ({
       query.set("amountTo", amount_to.toString());
     }
 
-    query.set("isFlipped", isFlipped.toString());
     query.set("isReverse", (lastTouchedInput === "TO").toString());
 
     if (cur_to) {
-      query.set("currencyTo", cur_to);
+      query.set("cur_to", cur_to);
     }
     if (cur_from) {
-      query.set("currencyFrom", cur_from);
+      query.set("cur_from", cur_from);
     }
 
     window.open('https://matbea.com/swap?' + query)
