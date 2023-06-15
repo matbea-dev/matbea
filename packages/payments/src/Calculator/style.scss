@@ -1,3 +1,5 @@
+@import "../../../core/src/styles/mixins.scss";
+
 .swap {
   padding-left: 14px;
   padding-right: 14px;
@@ -24,6 +26,24 @@
     order: 2;
 
     flex: 1 1 auto;
+
+    @include screen(md) {
+      position: relative;
+
+      flex: 0 0 24px;
+
+      & > * {
+        position: absolute;
+        left: 0;
+        top: 67px;
+      }
+    }
+
+    .divider {
+      @include screen(md) {
+        display: none;
+      }
+    }
   }
 }
 
@@ -41,4 +61,3 @@
     transform: rotate(360deg);
   }
 }
-

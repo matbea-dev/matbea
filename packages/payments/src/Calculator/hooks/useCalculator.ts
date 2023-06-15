@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Timeout } from "react-number-format/types/types";
-import { apiGetWizardData, IOption, IWizardData, apiCalculateCommission } from "@matbea/api";
+import {
+  apiGetWizardData,
+  IOption,
+  IWizardData,
+  apiCalculateCommission,
+} from "@matbea/api";
 import { getExchangeOptions } from "../lib";
 
 type FormFields = {
@@ -9,6 +14,46 @@ type FormFields = {
   currencyTo: IOption | null;
   amountFrom: string;
   amountTo: string;
+};
+
+const SORT_POSITIONS = [
+  "BTC",
+  "USDT.TRC20",
+  "LTC",
+  "ETH",
+  "DOGE",
+  "USDC",
+  "TRX",
+  "XMR",
+  "DASH",
+  "ZEC",
+  "BNB",
+];
+
+const validateField = ({
+  currency,
+  amount,
+  deposit,
+}: {
+  currency: IOption;
+  amount: string;
+  deposit?: boolean;
+}) => {
+  if (currency?.paymentSystem && amount.length > 0) {
+    const key = deposit ? "SumDeposit" : "SumWithdraw";
+    if ((currency.paymentSystem?.[`min${key}`] || 0) > +amount) {
+      return `from ${currency.paymentSystem?.[`min${key}`]} ${
+        currency.currency.shortName
+      }`;
+    }
+
+    if ((currency.paymentSystem?.[`max${key}`] || 0) < +amount) {
+      return `up to ${currency.paymentSystem?.[`max${key}`]} ${
+        currency.currency.shortName
+      }`;
+    }
+  }
+  return null;
 };
 
 export const useCalculator = () => {
@@ -40,7 +85,19 @@ export const useCalculator = () => {
 
   const rawOptions = useMemo(() => {
     if (wizardData) {
-      return getExchangeOptions(wizardData, isFlipped);
+      const data = getExchangeOptions(wizardData, isFlipped);
+      return {
+        in: data.in.sort(
+          (el1, el2) =>
+            SORT_POSITIONS.indexOf(el1?.currency.shortName) -
+            SORT_POSITIONS.indexOf(el2?.currency.shortName)
+        ),
+        out: data.out.sort(
+          (el1, el2) =>
+            SORT_POSITIONS.indexOf(el1?.currency.shortName) -
+            SORT_POSITIONS.indexOf(el2?.currency.shortName)
+        ),
+      };
     }
     return {
       in: [],
@@ -131,10 +188,18 @@ export const useCalculator = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const queryCurTo = params.get("currencyTo");
-    const isFlipped = !!wizardData?.paymentsSystems.find(
-      (o) => o.bestchangeTickers.deposit[0] === queryCurTo
-    );
+
+    const queryCurTo = params.get("cur_to") || "";
+    const queryCurFrom = params.get("cur_from") || "";
+    const isFlipped =
+      !!wizardData?.paymentsSystems.some(
+        (o) => o.bestchangeTickers.deposit[0] === queryCurTo
+      ) ||
+      !!Object.values(wizardData?.currencies || {}).some(
+        (o) =>
+          o.shortName === queryCurFrom ||
+          o.replaceShortNameForBestchange === queryCurFrom
+      );
     setIsFlipped(isFlipped);
   }, [wizardData]);
 
@@ -147,8 +212,8 @@ export const useCalculator = () => {
       return;
     }
     const params = new URLSearchParams(window.location.search);
-    const queryCurTo = params.get("currencyTo");
-    const queryCurFrom = params.get("currencyFrom");
+    const queryCurTo = params.get("cur_to");
+    const queryCurFrom = params.get("cur_from");
     const amount_from = params.get("amountFrom");
     const amount_to = params.get("amountTo");
     const isReverse = params.get("isReverse");
@@ -157,21 +222,28 @@ export const useCalculator = () => {
       const curTo = rawOptions.out.find(
         (o) =>
           o.currency.shortName === queryCurTo ||
-          o.paymentSystem?.bestchangeTickers.deposit[0] === queryCurTo
+          o.paymentSystem?.bestchangeTickers.deposit[0] === queryCurTo ||
+          o.currency?.replaceShortNameForBestchange === queryCurTo
       );
       if (curTo) {
         form.setValue("currencyTo", curTo);
       }
+    } else {
+      form.setValue("currencyTo", rawOptions.out[0]);
     }
+
     if (queryCurFrom) {
       const curFrom = rawOptions.in.find(
         (o) =>
           o.currency.shortName === queryCurFrom ||
-          o.paymentSystem?.bestchangeTickers.deposit[0] === queryCurFrom
+          o.paymentSystem?.bestchangeTickers.deposit[0] === queryCurFrom ||
+          o.currency.replaceShortNameForBestchange === queryCurFrom
       );
       if (curFrom) {
         form.setValue("currencyFrom", curFrom);
       }
+    } else {
+      form.setValue("currencyFrom", rawOptions.in[0]);
     }
 
     if (amount_from && isReverse === "false") {
@@ -197,28 +269,23 @@ export const useCalculator = () => {
 
   useEffect(() => {
     form.clearErrors("amountFrom");
-    if (fields.currencyFrom?.paymentSystem) {
-      if (
-        fields.currencyFrom.paymentSystem.minSumDeposit > +fields.amountFrom
-      ) {
-        form.setError("amountFrom", {
-          message: `from ${
-            fields.currencyFrom.paymentSystem?.minSumDeposit
-          } ${fields.currencyFrom.currency.shortName}`,
-        });
-      }
-
-      if (
-        fields.currencyFrom.paymentSystem.maxSumDeposit < +fields.amountFrom
-      ) {
-        form.setError("amountFrom", {
-          message: `up to ${
-            fields.currencyFrom.paymentSystem?.maxSumDeposit
-          } ${fields.currencyFrom.currency.shortName}`,
-        });
-      }
+    if (!fields.currencyFrom) {
+      return;
     }
+    const error = validateField({
+      currency: fields.currencyFrom,
+      amount: fields.amountFrom,
+      deposit: true,
+    });
 
+    if (error) {
+      form.setError("amountFrom", {
+        message: error,
+      });
+    }
+  }, [fields.amountFrom, fields.currencyFrom]);
+
+  useEffect(() => {
     if (lastTouchedInput === "FROM") {
       calculateComission();
     }
@@ -226,24 +293,23 @@ export const useCalculator = () => {
 
   useEffect(() => {
     form.clearErrors("amountTo");
-    if (fields.currencyTo?.paymentSystem) {
-      if (fields.currencyTo.paymentSystem.minSumDeposit > +fields.amountTo) {
-        form.setError("amountTo", {
-          message: `from ${
-            fields.currencyTo.paymentSystem?.minSumWithdraw
-          } ${fields.currencyTo.currency.shortName}`,
-        });
-      }
-
-      if (fields.currencyTo.paymentSystem.maxSumDeposit < +fields.amountTo) {
-        form.setError("amountTo", {
-          message: `up to ${
-            fields.currencyTo.paymentSystem?.maxSumWithdraw
-          } ${fields.currencyTo.currency.shortName}`,
-        });
-      }
+    if (!fields.currencyTo) {
+      return;
     }
+    const error = validateField({
+      currency: fields.currencyTo,
+      amount: fields.amountTo,
+      deposit: false,
+    });
 
+    if (error) {
+      form.setError("amountTo", {
+        message: error,
+      });
+    }
+  }, [fields.amountTo, fields.currencyTo]);
+
+  useEffect(() => {
     if (lastTouchedInput === "TO") {
       calculateComission();
     }
@@ -262,4 +328,3 @@ export const useCalculator = () => {
     setLastTouchedInput,
   };
 };
-

@@ -1,6 +1,6 @@
-43 error Error: Command failed with exit code 128: git tag v0.0.1 -m v0.0.1
-43 error fatal: tag 'v0.0.1' already exists
-43 error     at makeError (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/lib/error.js:60:11)
-43 error     at handlePromise (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/index.js:118:26)
-43 error     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-43 error     at async Promise.all (index 0)
+48 error Error: Command failed with exit code 128: git tag v0.0.6 -m v0.0.6
+48 error fatal: tag 'v0.0.6' already exists
+48 error     at makeError (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/lib/error.js:60:11)
+48 error     at handlePromise (/Users/belchushka/Documents/hashbon.com/matbea-npm/node_modules/@lerna/child-process/node_modules/execa/index.js:118:26)
+48 error     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+48 error     at async Promise.all (index 0)

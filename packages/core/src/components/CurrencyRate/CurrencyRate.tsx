@@ -10,8 +10,6 @@ type CurrencyRateProps = {
   fiatName: string;
 };
 
-console.log(IconInfo)
-
 export const CurrencyRate: React.FC<CurrencyRateProps> = ({
   valueCrypto,
   cryptoName,

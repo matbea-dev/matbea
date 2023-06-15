@@ -3,7 +3,7 @@ import { ICalculator } from "./types";
 import cn from "classnames";
 import { Controller } from "react-hook-form";
 import IconSwap from "./icon--swap.svg";
-import { Box, TextButton, H4, Input, Divider, Button, BlockAlignText, SelectSearch, CurrencyRate, Space } from "@matbea/core";
+import { Box, TextButton, Input, Divider, Button, BlockAlignText, SelectSearch, CurrencyRate, Space, Logo, BodyL } from "@matbea/core";
 import { useCalculator } from "./hooks";
 import './style.scss'
 import classNames from "classnames";
@@ -22,7 +22,8 @@ const boxStyles: Record<string, any> = {
 
 export const Calculator: React.FC<ICalculator> = ({
   style,
-  className
+  className,
+  referal = {}
 }) => {
 
   const {
@@ -76,6 +77,13 @@ export const Calculator: React.FC<ICalculator> = ({
     if (cur_from) {
       query.set("cur_from", cur_from);
     }
+    if (referal.fromPartner){
+      query.set("fromPartner", referal.fromPartner)
+    }
+    if (referal.utmSource){
+      query.set("utm_source", referal.utmSource)
+    }
+
 
     window.open('https://matbea.com/swap?' + query)
   };
@@ -84,7 +92,9 @@ export const Calculator: React.FC<ICalculator> = ({
     <Box {...boxStyles.standalone} style={style} className={classNames('swap',className)}>
       <Space flex direction="column" rowGap="level2">
           <BlockAlignText align="center">
-            <H4>Calculator</H4>
+            <Logo size="lg"/>
+            <BodyL weight="bold">SWAP</BodyL>
+            <p>Быстрый обмен криптовалют без регистрации и верификации</p>
           </BlockAlignText>
         <div className="swap__body">
           <Space
@@ -125,9 +135,9 @@ export const Calculator: React.FC<ICalculator> = ({
                   render={({ field }) => {
                     return (
                       <SelectSearch
-                        label={'You pay'}
+                        label={'Отдаете'}
                         options={inOptions}
-                        placeholder={'Select currency'}
+                        placeholder={'Выберите валюту'}
                         onChange={field.onChange}
                         value={field.value}
                       />
@@ -142,7 +152,7 @@ export const Calculator: React.FC<ICalculator> = ({
                     return (
                       <Input
                         name="amountFrom"
-                        placeholder={'Enter amount'}
+                        placeholder={'Введите сумму'}
                         type="number"
                         autoComplete="off"
                         error={form.formState.errors.amountFrom?.message}
@@ -204,9 +214,9 @@ export const Calculator: React.FC<ICalculator> = ({
                   render={({ field }) => {
                     return (
                       <SelectSearch
-                        label={'You recive'}
+                        label={'Получаете'}
                         options={outOptions}
-                        placeholder={'Select currency'}
+                        placeholder={'Выберите валюту'}
                         onChange={field.onChange}
                         value={field.value}
                       />
@@ -221,7 +231,7 @@ export const Calculator: React.FC<ICalculator> = ({
                     return (
                       <Input
                         name="currencyCrypto"
-                        placeholder={'Enter amount'}
+                        placeholder={'Введите сумму'}
                         type="number"
                         error={form.formState.errors.amountTo?.message}
                         disabled={comissionLoading}
@@ -256,7 +266,7 @@ export const Calculator: React.FC<ICalculator> = ({
         </div>
         <Space direction="column" flex rowGap="const-level4">
           <Button disabled={comissionLoading} onClick={handleCalculatorSubmit}>
-            <TextButton weight="bold">Convert</TextButton>
+            <TextButton weight="bold">Обменять</TextButton>
           </Button>
         </Space>
       </Space>

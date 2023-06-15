@@ -23,4 +23,5 @@ export * from "./TextArea";
 export * from "./UlList";
 export * from "./CurrencyRate";
 export * from "./SelectSearch";
+export * from "./Logo";
 
