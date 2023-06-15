@@ -23,7 +23,7 @@ const boxStyles: Record<string, any> = {
 export const Calculator: React.FC<ICalculator> = ({
   style,
   className,
-  referal = {}
+  referral = {}
 }) => {
 
   const {
@@ -77,11 +77,11 @@ export const Calculator: React.FC<ICalculator> = ({
     if (cur_from) {
       query.set("cur_from", cur_from);
     }
-    if (referal.fromPartner){
-      query.set("fromPartner", referal.fromPartner)
+    if (referral.fromPartner){
+      query.set("fromPartner", referral.fromPartner)
     }
-    if (referal.utmSource){
-      query.set("utm_source", referal.utmSource)
+    if (referral.utmSource){
+      query.set("utm_source", referral.utmSource)
     }
 
 

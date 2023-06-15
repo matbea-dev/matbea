@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Calculator>;
 
 export const Default: Story = {
 	args: {
-    referal: {
+    referral: {
       utmSource: 'test_utm'
     }
 	},

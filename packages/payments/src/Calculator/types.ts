@@ -3,7 +3,7 @@ import React from "react"
 export interface ICalculator {
     style?: React.CSSProperties
     className?: string
-    referal?: {
+    referral?: {
       fromPartner?: string
       utmSource?: string
     }
