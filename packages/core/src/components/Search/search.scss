@@ -1,0 +1,11 @@
+.search {
+  .btn--icon {
+    color: var(--color-light-gray-3);
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--color-dark-gray);
+    }
+  }
+}

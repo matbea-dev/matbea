@@ -4,6 +4,15 @@
   padding-left: 14px;
   padding-right: 14px;
 
+  @include screen(md) {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  @include screen(xl) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   &__top {
     height: 30px;
   }
@@ -35,7 +44,9 @@
       & > * {
         position: absolute;
         left: 0;
-        top: 67px;
+        top: 36px;
+
+        transition: 0.2s;
       }
     }
 
@@ -58,6 +69,6 @@
 }
 .swap__button-swap--active {
   .btn {
-    transform: rotate(360deg);
+    transform: rotate(290deg);
   }
 }

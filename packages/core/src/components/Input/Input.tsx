@@ -49,7 +49,7 @@ export const Input: React.FC<InputProps> = ({
 	onChange,
 	onBlur,
 	required,
-	inputMode = "text",
+	inputMode = "text" as InputMode,
 	autoComplete = "off",
 	format,
 }) => (
@@ -130,7 +130,7 @@ export const InputActions: React.FC<InputProps> = ({
 	onChange,
 	required,
 	autoComplete = "off",
-	inputMode = "text",
+	inputMode = "text" as InputMode,
 }) => {
 	const [valueInput, setValueInput] = useState<string>(value);
 	const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

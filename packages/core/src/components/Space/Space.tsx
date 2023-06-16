@@ -1,6 +1,5 @@
 import React from "react";
 import cn from "classnames";
-import "./space.scss";
 
 type SpaceProps = {
 	children: React.ReactNode;
@@ -18,6 +17,7 @@ type SpaceProps = {
 		xl?: SpaceTypes;
 		xxl?: SpaceTypes;
 	};
+	tabIndex?: number;
 };
 
 type SpaceTypes = {
@@ -51,7 +51,7 @@ type RowGap =
 
 type ColumnGap = "level1" | "level2" | "level3" | "level4" | "level5" | "const-level1" | "const-level2" | "const-level3" | "const-level4" | "const-level5";
 
-export const Space: React.FC<SpaceProps> = ({ children, align, justify, flex, wrap, direction, rowGap, columnGap, breakpoints, className }) => {
+export const Space = React.forwardRef<HTMLDivElement, SpaceProps>(({ children, align, justify, flex, wrap, direction, rowGap, columnGap, breakpoints, className, tabIndex }, ref) => {
 	let breakpointsValue = "";
 
 	breakpoints &&
@@ -71,6 +71,7 @@ export const Space: React.FC<SpaceProps> = ({ children, align, justify, flex, wr
 
 	return (
 		<div
+			ref={ref}
 			className={cn(
 				"space",
 				{
@@ -85,8 +86,11 @@ export const Space: React.FC<SpaceProps> = ({ children, align, justify, flex, wr
 				breakpointsValue,
 				className
 			)}
+			tabIndex={tabIndex}
 		>
 			{children}
 		</div>
 	);
-};
+});
+
+Space.displayName = "Space";

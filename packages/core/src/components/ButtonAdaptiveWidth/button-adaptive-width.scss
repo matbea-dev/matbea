@@ -1,0 +1,46 @@
+@import "../../styles/mixins.scss";
+.button-adaptive-width {
+  width: auto;
+  flex: 0 1 auto;
+}
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+    .button-adaptive-width-#{$infix}-size-full {
+      width: 100%;
+      flex: 1 1 100%;
+      & > * {
+        width: 100%;
+      }
+
+      & > a {
+        display: inline-flex;
+
+        width: 100%;
+        flex: 1 1 100%;
+
+        & > * {
+          width: 100%;
+        }
+      }
+    }
+    .button-adaptive-width-#{$infix}-size-auto {
+      width: auto;
+      flex: 0 1 auto;
+
+      & > * {
+        width: auto;
+      }
+
+      & > a {
+        display: inline-flex;
+
+        width: auto;
+
+        & > * {
+          width: auto;
+        }
+      }
+    }
+  }
+}

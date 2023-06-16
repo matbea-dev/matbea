@@ -1,6 +1,5 @@
 import React from "react";
 import cn from "classnames";
-import "./button.scss";
 
 type ButtonLinkProps = {
 	children?: React.ReactNode;
@@ -49,7 +48,7 @@ export type Size = "large" | "medium" | "small";
 
 export type Width = "full" | "auto";
 
-export type Variant = "primary" | "secondary" | "tertiary" | "fourth" | "fifth" | "sixth" | "circle" | "warning" | "flat" | "vote" | "only-icon" | "icon" | "icon-secondary";
+export type Variant = "primary" | "secondary" | "tertiary" | "fourth" | "fifth" | "sixth" | "circle" | "warning" | "flat" | "vote" | "only-icon" | "icon" | "icon-secondary" | "icon-tertiary";
 
 export const Buttons: React.FC<ButtonsProps> = ({ children, size, onClick, variant, type = "button", url = "#", target, disabled = false, width, ...props }) => (
 	<>
